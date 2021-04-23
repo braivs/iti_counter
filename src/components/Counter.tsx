@@ -15,10 +15,11 @@ export function Counter () {
     setValue(0);
   }
 
+  const valueClass = (value === 5) ? s.valueColor : ''
 
   return (
     <div className={s.mainContainer}>
-      <span className={s.valueColor}>{value}</span>
+      <span className={valueClass}>{value}</span>
       <div className={s.buttonContainer}>
         <ButtonInc upCounter={upCounter} currentValue={value}/>
         <ButtonReset resetCounter={resetCounter} currentValue={value}/>
