@@ -1,0 +1,22 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  border: 5px solid olive;
+  width: 200px;
+  height: 200px;
+  align-items: center;
+  font-size: 50px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+
+}
+button {
+  font-size: 30px;
+}
+
+.valueColor {
+  color: darkgrey;
+}
