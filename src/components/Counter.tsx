@@ -20,7 +20,9 @@ export function Counter () {
 
   return (
     <div className={s.mainContainer}>
-      <span className={valueClass}>{value}</span>
+      <div className={s.valueContainer}>
+        <span className={valueClass}>{value}</span>
+      </div>
       {/*вариант с двумя компонентами*/}
       {/*<div className={s.buttonContainer}>
         <ButtonInc upCounter={upCounter} currentValue={value}/>

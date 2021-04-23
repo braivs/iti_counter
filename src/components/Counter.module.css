@@ -1,22 +1,42 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
-  border: 5px solid olive;
+  border: 2px solid #63DAFC;
+  border-radius: 10px;
   width: 200px;
   height: 200px;
   align-items: center;
   font-size: 50px;
+  justify-content: space-around;
+}
+
+.valueContainer {
+  background: #63DAFC;
+  width: 180px;
+  height: 80px;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
 .buttonContainer {
   display: flex;
-  justify-content: center;
-
+  justify-content: space-around;
+  /*align-items: center;*/
+  border: 2px solid #63DAFC;
+  width: 180px;
+  border-radius: 10px;
+  padding-bottom: 15px;
 }
 button {
   font-size: 30px;
+  background: #63DAFC;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+
 }
 
 .valueColor {
-  color: darkgrey;
+  color: cadetblue;
 }

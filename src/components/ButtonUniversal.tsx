@@ -1,4 +1,5 @@
 import React from 'react';
+import {isBoolean} from 'util';
 
 type ButtonButtonUniversalType = {
   title: string
@@ -15,6 +16,12 @@ export function ButtonUniversal (props: ButtonButtonUniversalType) {
   let disableValue;
   if (props.title === 'inc' && props.currentValue === 5) disableValue = true
   if (props.title === 'reset' && props.currentValue === 0) disableValue = true
+
+  /*let disableValue2 = () => {
+    if (props.title === 'inc' && props.currentValue === 5) return true
+    if (props.title === 'reset' && props.currentValue === 0) return true
+    else return false;
+  }*/
 
   return (
     <div className='ButtonInc'>
