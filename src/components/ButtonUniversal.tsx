@@ -1,0 +1,27 @@
+import React from 'react';
+
+type ButtonButtonUniversalType = {
+  title: string
+  upCounter: () => void;
+  resetCounter: () => void
+  currentValue: number;
+}
+
+export function ButtonUniversal (props: ButtonButtonUniversalType) {
+  let onClickHanlder;
+  if (props.title === 'inc') onClickHanlder = props.upCounter;
+  if (props.title === 'reset') onClickHanlder = props.resetCounter;
+
+  let disableValue;
+  if (props.title === 'inc' && props.currentValue === 5) disableValue = true
+  if (props.title === 'reset' && props.currentValue === 0) disableValue = true
+
+  return (
+    <div className='ButtonInc'>
+      <button
+        onClick={onClickHanlder}
+        disabled={disableValue}
+      >{props.title}</button>
+    </div>
+  )
+}
