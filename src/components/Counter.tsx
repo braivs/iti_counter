@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import {ButtonInc} from './ButtonInc';
-import {ButtonReset} from './ButtonReset';
 import s from './Counter.module.css'
 import {ButtonUniversal} from './ButtonUniversal';
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import {isBoolean} from 'util';
 
 type ButtonButtonUniversalType = {
   title: string
