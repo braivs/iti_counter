@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import s from './Counter.module.css'
-import {ButtonUniversal} from './ButtonUniversal';
+import s from './Universe.module.css'
+import {Button} from './Button';
 
 export function Counter () {
   let [value, setValue] = useState<number>(0)
@@ -14,27 +14,21 @@ export function Counter () {
     setValue(0);
   }
 
-  const valueClass = (value === 5) ? s.valueColor : ''
+  const valueClass = (value === 5) ? s.maxValueColor : ''
 
   return (
     <div className={s.mainContainer}>
       <div className={s.valueContainer}>
-        <span className={valueClass}>{value}</span>
+        <span className={`${s.value} ${valueClass}`}>{value}</span>
       </div>
-      {/*вариант с двумя компонентами*/}
-      {/*<div className={s.buttonContainer}>
-        <ButtonInc upCounter={upCounter} currentValue={value}/>
-        <ButtonReset resetCounter={resetCounter} currentValue={value}/>
-      </div>*/}
-      {/*вариант с одним компонентом*/}
       <div className={s.buttonContainer}>
-        <ButtonUniversal
+        <Button
           title = 'inc'
           upCounter={upCounter}
           resetCounter={resetCounter}
           currentValue={value}
         />
-        <ButtonUniversal
+        <Button
           title = 'reset'
           upCounter={upCounter}
           resetCounter={resetCounter}

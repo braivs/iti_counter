@@ -1,13 +1,13 @@
 import React from 'react';
 
-type ButtonButtonUniversalType = {
+type ButtonType = {
   title: string
   upCounter: () => void;
   resetCounter: () => void
   currentValue: number;
 }
 
-export function ButtonUniversal (props: ButtonButtonUniversalType) {
+export function Button (props: ButtonType) {
   let onClickHanlder;
   if (props.title === 'inc') onClickHanlder = props.upCounter;
   if (props.title === 'reset') onClickHanlder = props.resetCounter;

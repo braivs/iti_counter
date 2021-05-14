@@ -1,0 +1,12 @@
+.sText {
+  font-size: 25px;
+  color: #63DAFC;
+}
+
+input {
+  width: 40px;
+  margin-left: 20px;
+  text-align: center;
+  border: 2px solid #63DAFC;
+  border-radius: 5px;
+}

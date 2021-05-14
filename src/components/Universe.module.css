@@ -3,17 +3,19 @@
   flex-direction: column;
   border: 2px solid #63DAFC;
   border-radius: 10px;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 250px;
   align-items: center;
   font-size: 50px;
   justify-content: space-around;
+  margin-right: 50px;
 }
 
 .valueContainer {
-  background: #63DAFC;
-  width: 180px;
-  height: 80px;
+  border: 2px solid #63DAFC;
+  background: #292C35;
+  width: 280px;
+  height: 120px;
   text-align: center;
   border-radius: 10px;
   font-weight: bold;
@@ -22,9 +24,8 @@
 .buttonContainer {
   display: flex;
   justify-content: space-around;
-  /*align-items: center;*/
   border: 2px solid #63DAFC;
-  width: 180px;
+  width: 280px;
   border-radius: 10px;
   padding-bottom: 15px;
 }
@@ -34,9 +35,13 @@ button {
   border: none;
   border-radius: 8px;
   font-weight: bold;
-
+  cursor: pointer;
 }
 
-.valueColor {
+.value {
+  color: #63DAFC;
+}
+
+.maxValueColor {
   color: cadetblue;
 }
