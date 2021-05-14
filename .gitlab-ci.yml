@@ -6,7 +6,7 @@ build:
   image: node:latest    # Run the job in a `node` docker image
   stage: build
   variables:
-    PUBLIC_URL: https://briws.gitlab.io/iti_exam/
+    PUBLIC_URL: https://briws.gitlab.io/iti_counter/
   script:
     - yarn install      # Run `yarn install` and `yarn build`
     - yarn build
