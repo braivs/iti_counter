@@ -7,10 +7,9 @@ type ButtonType = {
 }
 
 export function CustomButton(props: ButtonType) {
-  let onClickHanlder;
 
   return (
-    <div className="ButtonInc">
+    <div>
       <button
         onClick={props.onClick}
         disabled={props.disabled}

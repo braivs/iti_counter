@@ -23,22 +23,18 @@ export function Settings() {
     }
   }, [])
 
-  // write to localstorage on change
-  useEffect(() => {
-    localStorage.setItem('maxValue', JSON.stringify(maxValue))
-  }, [maxValue])
-  useEffect(() => {
-    localStorage.setItem('startValue', JSON.stringify(startValue))
-  }, [startValue])
-
-  // write to localStorage on set click
-
   // handlers for settings
   const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement> ) => {
     setMaxValue(JSON.parse(e.currentTarget.value))
   }
   const onChangeStartHandler = (e: ChangeEvent<HTMLInputElement> ) => {
     setStartValue(JSON.parse(e.currentTarget.value))
+  }
+
+  // write to localStorage on set click
+  const setHandler = () => {
+    localStorage.setItem('maxValue', JSON.stringify(maxValue))
+    localStorage.setItem('startValue', JSON.stringify(startValue))
   }
 
   return (
@@ -63,7 +59,7 @@ export function Settings() {
       <div className={sU.buttonContainer}>
         <CustomButton title='Set'
                       disabled={false}
-                      onClick={() => {}} />
+                      onClick={setHandler} />
       </div>
     </div>
   )
