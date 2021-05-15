@@ -7,7 +7,7 @@ type ButtonType = {
   currentValue: number;
 }
 
-export function Button (props: ButtonType) {
+export function CustomButton (props: ButtonType) {
   let onClickHanlder;
   if (props.title === 'inc') onClickHanlder = props.upCounter;
   if (props.title === 'reset') onClickHanlder = props.resetCounter;

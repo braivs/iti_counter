@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import s from './Universe.module.css'
-import {Button} from './Button';
+import {CustomButton} from './CustomButton';
 
 export function Counter () {
   let [value, setValue] = useState<number>(0)
@@ -22,13 +22,13 @@ export function Counter () {
         <span className={`${s.value} ${valueClass}`}>{value}</span>
       </div>
       <div className={s.buttonContainer}>
-        <Button
+        <CustomButton
           title = 'inc'
           upCounter={upCounter}
           resetCounter={resetCounter}
           currentValue={value}
         />
-        <Button
+        <CustomButton
           title = 'reset'
           upCounter={upCounter}
           resetCounter={resetCounter}
