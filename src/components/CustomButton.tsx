@@ -2,31 +2,18 @@ import React from 'react';
 
 type ButtonType = {
   title: string
-  upCounter: () => void;
-  resetCounter: () => void
-  currentValue: number;
+  disabled: boolean
+  onClick: () => void
 }
 
-export function CustomButton (props: ButtonType) {
+export function CustomButton(props: ButtonType) {
   let onClickHanlder;
-  if (props.title === 'inc') onClickHanlder = props.upCounter;
-  if (props.title === 'reset') onClickHanlder = props.resetCounter;
-
-  let disableValue;
-  if (props.title === 'inc' && props.currentValue === 5) disableValue = true
-  if (props.title === 'reset' && props.currentValue === 0) disableValue = true
-
-  /*let disableValue2 = () => {
-    if (props.title === 'inc' && props.currentValue === 5) return true
-    if (props.title === 'reset' && props.currentValue === 0) return true
-    else return false;
-  }*/
 
   return (
-    <div className='ButtonInc'>
+    <div className="ButtonInc">
       <button
-        onClick={onClickHanlder}
-        disabled={disableValue}
+        onClick={props.onClick}
+        disabled={props.disabled}
       >{props.title}</button>
     </div>
   )

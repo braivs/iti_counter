@@ -31,6 +31,7 @@ export function Settings() {
     localStorage.setItem('startValue', JSON.stringify(startValue))
   }, [startValue])
 
+  // write to localStorage on set click
 
   // handlers for settings
   const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement> ) => {
@@ -59,17 +60,10 @@ export function Settings() {
         </div>
 
       </div>
-      {/*вариант с двумя компонентами*/}
-      {/*<div className={s.buttonContainer}>
-        <ButtonInc upCounter={upCounter} currentValue={value}/>
-        <ButtonReset resetCounter={resetCounter} currentValue={value}/>
-      </div>*/}
-      {/*вариант с одним компонентом*/}
       <div className={sU.buttonContainer}>
         <CustomButton title='Set'
-                      upCounter={() => {}}
-                      resetCounter={() => {}}
-                      currentValue={1} />
+                      disabled={false}
+                      onClick={() => {}} />
       </div>
     </div>
   )
