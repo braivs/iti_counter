@@ -3,25 +3,39 @@ import s from './Universe.module.css'
 import {CustomButton} from './CustomButton';
 
 export function Counter () {
-  let [value, setValue] = useState<number>(0)
+  // получаю стартовое и максимальные значения из localStorage
+  let startValueStr = localStorage.getItem('startValue')
+  let startValue = startValueStr ? JSON.parse(startValueStr) : 0
+  let maxValueStr = localStorage.getItem('maxValue')
+  let maxValue = maxValueStr ? JSON.parse(maxValueStr) : 5
+
+
+  let [value, setValue] = useState<number>(startValue)
   let [disabledInc, setDisabledInc] = useState<boolean>(false)
   let [disabledReset, setDisabledReset] = useState<boolean>(false)
 
+  // блокировка кнопок по условиям
   useEffect(() => {
-    value === 5 ? setDisabledInc(true) : setDisabledInc(false)
-    value === 0 ? setDisabledReset(true) : setDisabledReset(false)
+    value === maxValue ? setDisabledInc(true) : setDisabledInc(false)
+    value === startValue ? setDisabledReset(true) : setDisabledReset(false)
     },
-    [value])
+    [value, maxValue, startValue])
+
+  //перерисовка если изменились стартовое и максимальное значение
+  useEffect(() => {},
+
+    )
 
   function upCounter() {
     let NewValue = ++value;
     setValue(NewValue)
   }
   function resetCounter() {
-    setValue(0);
+    setValue(startValue);
   }
 
-  const valueClass = (value === 5) ? s.maxValueColor : ''
+  //красный цвет счётчика, когда максимум
+  const valueClass = (value === maxValue) ? s.maxValueColor : ''
 
   return (
     <div className={s.mainContainer}>
