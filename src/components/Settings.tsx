@@ -37,19 +37,30 @@ export function Settings() {
     localStorage.setItem('startValue', JSON.stringify(startValue))
   }
 
+  let maxError;
+  let startError;
+  maxError = maxValue < 1 ? sS.error : ''
+  startError = startValue < 0 ? sS.error : ''
+  if (maxValue < startValue) {
+    maxError = sS.error
+    startError = sS.error;
+  }
+
   return (
     <div className={sU.mainContainer}>
       <div className={sU.valueContainer}>
         <div className={sS.sText}>
           <span>max value:</span>
-          <input type="number"
+          <input className={maxError}
+                 type="number"
                  value={maxValue}
                  onChange={onChangeMaxHandler}
           />
         </div>
         <div className={sS.sText}>
           <span>start value:</span>
-          <input type="number"
+          <input className={startError}
+                 type="number"
                  value={startValue}
                  onChange={onChangeStartHandler}
           />

@@ -10,3 +10,8 @@ input {
   border: 2px solid #63DAFC;
   border-radius: 5px;
 }
+
+.error {
+  border: 2px solid red;
+  background: indianred;
+}

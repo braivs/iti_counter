@@ -4,11 +4,11 @@ import {CustomButton} from './CustomButton';
 
 export function Counter () {
   // получаю стартовое и максимальные значения из localStorage
+  // стейты возможно избыточны, надо вынести в app, но пока так
   let startValueStr = localStorage.getItem('startValue')
-  let startValue = startValueStr ? JSON.parse(startValueStr) : 0
+  let [startValue, setStartValue] = useState<number>(startValueStr ? JSON.parse(startValueStr) : 0)
   let maxValueStr = localStorage.getItem('maxValue')
-  let maxValue = maxValueStr ? JSON.parse(maxValueStr) : 5
-
+  let [maxValue, setMaxValue] = useState<number>(maxValueStr ? JSON.parse(maxValueStr) : 5)
 
   let [value, setValue] = useState<number>(startValue)
   let [disabledInc, setDisabledInc] = useState<boolean>(false)
@@ -22,9 +22,9 @@ export function Counter () {
     [value, maxValue, startValue])
 
   //перерисовка если изменились стартовое и максимальное значение
-  useEffect(() => {},
-
-    )
+  // ! не получается отслеживать изменения localStorage
+  /*useEffect(() => {},
+    window.localStorage.getItem("count"))*/
 
   function upCounter() {
     let NewValue = ++value;
