@@ -70,45 +70,20 @@ export function Settings(props: SettingsType) {
     }
   }*/
 
+  let [messageErrorStatus, setMessageErrorStatus] = useState<number>(0)
+  let [statusMessage, setStatusMessage] = useState<string>('')
+
   useEffect(() => {
     console.log('maxValueTmp='+maxValueTmp)
     console.log('startValueTmp='+startValueTmp)
-    if (startValueTmp < 0 || maxValueTmp === 0 || startValueTmp === maxValueTmp) {
+    if (startValueTmp < 0 || maxValueTmp === 0 || startValueTmp >= maxValueTmp ) {
       setStatusMessage('Incorrect Value!')
       console.log(statusMessage)
     } else {
       setStatusMessage('enter values and press set')
       console.log(statusMessage)
     }
-  },[startValueTmp, maxValueTmp])
-
-  // let messageErrorStatus;
-
-  let [messageErrorStatus, setMessageErrorStatus] = useState<number>(0)
-  let [statusMessage, setStatusMessage] = useState<string>('')
-
-
-
-  //установка статусов useEffect, чтобы в реальном времени было
-/*  useEffect(() => {
-    // статусы
-    setMessageErrorStatus(goodAndBadValues(maxValueTmp, startValueTmp))
-    console.log(messageErrorStatus)
-
-    //Хорошее или плохое сообщение для value
-    let checkValue = goodAndBadValues(maxValueTmp, startValueTmp);
-    console.log(checkValue)
-    /!*if (checkValue === 0) {
-      setStatusMessage('enter values and press set')
-    } else if (checkValue === 1 || checkValue === 2 || checkValue === 3 ) {
-      setStatusMessage('Incorrect Value!')
-    }*!/
-    props.setValue(statusMessage)
-    console.log(statusMessage);
-  },[startValueTmp, maxValueTmp])*/
-
-
-
+  },[startValueTmp, maxValueTmp, statusMessage])
 
   function goodAndBadValueMessage() {
     if (messageErrorStatus === 0) return 'enter values and press set'
@@ -120,13 +95,11 @@ export function Settings(props: SettingsType) {
     // props.setValue('enter values and press set')
     // goodAndBadValues(maxValueTmp, startValueTmp)
     setMaxValueTmp(JSON.parse(e.currentTarget.value))
-    // props.setValue(statusMessage)
+    props.setValue(statusMessage)
   }
   const onChangeStartHandler = (e: ChangeEvent<HTMLInputElement> ) => {
-    // props.setValue('enter values and press set')
-    // goodAndBadValues(maxValueTmp, startValueTmp)
     setStartValueTmp(JSON.parse(e.currentTarget.value))
-    // props.setValue(statusMessage)
+    props.setValue(statusMessage)
   }
 
   // write to localStorage on set click & app states
@@ -137,15 +110,6 @@ export function Settings(props: SettingsType) {
     props.setMaxValue(maxValueTmp)
     localStorage.setItem('maxValue', JSON.stringify(maxValueTmp))
   }
-
- /* let maxError;
-  let startError;
-  maxError = maxValue < 1 ? sS.error : ''
-  startError = startValue < 0 ? sS.error : ''
-  if (maxValueTmp < startValueTmp) {
-    maxError = sS.error
-    startError = sS.error;
-  }*/
 
   return (
     <div className={sU.mainContainer}>
