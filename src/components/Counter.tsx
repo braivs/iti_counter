@@ -2,15 +2,20 @@ import React, {useEffect, useState} from 'react';
 import s from './Universe.module.css'
 import {CustomButton} from './CustomButton';
 
-export function Counter () {
-  // получаю стартовое и максимальные значения из localStorage
-  // стейты возможно избыточны, надо вынести в app, но пока так
-  let startValueStr = localStorage.getItem('startValue')
-  let [startValue, setStartValue] = useState<number>(startValueStr ? JSON.parse(startValueStr) : 0)
-  let maxValueStr = localStorage.getItem('maxValue')
-  let [maxValue, setMaxValue] = useState<number>(maxValueStr ? JSON.parse(maxValueStr) : 5)
+type CounterType = {
+  startValue: number
+  maxValue: number
+  value: number
+  setValue: (value: number) => void
+}
 
-  let [value, setValue] = useState<number>(startValue)
+export function Counter (props: CounterType) {
+  let startValue = props.startValue
+  let maxValue = props.maxValue
+
+  let value = props.value
+  const setValue = props.setValue
+
   let [disabledInc, setDisabledInc] = useState<boolean>(false)
   let [disabledReset, setDisabledReset] = useState<boolean>(false)
 
@@ -20,11 +25,6 @@ export function Counter () {
     value === startValue ? setDisabledReset(true) : setDisabledReset(false)
     },
     [value, maxValue, startValue])
-
-  //перерисовка если изменились стартовое и максимальное значение
-  // ! не получается отслеживать изменения localStorage
-  /*useEffect(() => {},
-    window.localStorage.getItem("count"))*/
 
   function upCounter() {
     let NewValue = ++value;

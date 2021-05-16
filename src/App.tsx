@@ -5,18 +5,26 @@ import {Settings} from './components/Settings';
 
 function App() {
   //вынес стейт из компонент и передаю его в пропсы
-  let [startValue, setStartValue] = useState<number>(0)
-  let [maxValue, setMaxValue] = useState<number>(0)
+  let startValueStr = localStorage.getItem('startValue')
+  let [startValue, setStartValue] = useState<number>(startValueStr ? JSON.parse(startValueStr) : 0)
+  let maxValueStr = localStorage.getItem('maxValue')
+  let [maxValue, setMaxValue] = useState<number>(maxValueStr ? JSON.parse(maxValueStr) : 5)
+
+  let [value, setValue] = useState<number>(startValue)
 
   return (
     <div className="App">
-      <Settings
-        startValue={startValue}
-        setStartValue={setStartValue}
-        maxValue={maxValue}
-        setMaxValue={setMaxValue}
+      <Settings startValue={startValue}
+                setStartValue={setStartValue}
+                maxValue={maxValue}
+                setMaxValue={setMaxValue}
+                setValue={setValue}
       />
-      <Counter />
+      <Counter startValue={startValue}
+               maxValue={maxValue}
+               value={value}
+               setValue={setValue}
+      />
     </div>
   );
 }

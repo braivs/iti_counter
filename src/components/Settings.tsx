@@ -8,6 +8,7 @@ type SettingsType = {
   setStartValue: (startValue: number) => void
   maxValue: number;
   setMaxValue: (maxValue: number) => void
+  setValue: (value: number) => void
 }
 
 export function Settings(props: SettingsType) {
@@ -15,22 +16,6 @@ export function Settings(props: SettingsType) {
   const setStartValue = props.setStartValue
   let maxValue = props.maxValue
   const setMaxValue = props.setMaxValue
-
-  //counter settings on start
-  useEffect(() => {
-    let maxValueAsString = localStorage.getItem('maxValue')
-    if (maxValueAsString) {
-      let newMaxValue = JSON.parse(maxValueAsString)
-      setMaxValue(newMaxValue)
-    }
-  }, [])
-  useEffect(() => {
-    let startValueAsString = localStorage.getItem('startValue')
-    if (startValueAsString) {
-      let newStartValue = JSON.parse(startValueAsString)
-      setStartValue(newStartValue)
-    }
-  }, [])
 
   // handlers for settings
   const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement> ) => {
@@ -40,10 +25,13 @@ export function Settings(props: SettingsType) {
     setStartValue(JSON.parse(e.currentTarget.value))
   }
 
-  // write to localStorage on set click
+  // write to localStorage on set click & app states
   const setHandler = () => {
-    localStorage.setItem('maxValue', JSON.stringify(maxValue))
+    props.setStartValue(startValue)
+    props.setValue(startValue)
     localStorage.setItem('startValue', JSON.stringify(startValue))
+    props.setMaxValue(maxValue)
+    localStorage.setItem('maxValue', JSON.stringify(maxValue))
   }
 
   let maxError;
