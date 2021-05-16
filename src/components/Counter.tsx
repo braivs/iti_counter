@@ -9,7 +9,7 @@ type CounterType = {
   setValue: (value: number | string) => void
 }
 
-export function Counter (props: CounterType) {
+export function Counter(props: CounterType) {
   let startValue = props.startValue
   let maxValue = props.maxValue
 
@@ -21,8 +21,12 @@ export function Counter (props: CounterType) {
 
   // блокировка кнопок по условиям
   useEffect(() => {
-    value === maxValue ? setDisabledInc(true) : setDisabledInc(false)
-    value === startValue ? setDisabledReset(true) : setDisabledReset(false)
+      value === maxValue ? setDisabledInc(true) : setDisabledInc(false)
+      value === startValue ? setDisabledReset(true) : setDisabledReset(false)
+      if (typeof value == 'string') {
+        setDisabledInc(true)
+        setDisabledReset(true)
+      }
     },
     [value, maxValue, startValue])
 
@@ -36,12 +40,13 @@ export function Counter (props: CounterType) {
       console.log('disable reset')
     }
   }
+
   function resetCounter() {
     setValue(startValue);
   }
 
   //красный цвет счётчика, когда максимум
-  const valueClass = (value === maxValue) ? s.maxValueColor : ''
+  const valueClass = (value === maxValue || value === 'Incorrect Value!') ? s.maxValueColor : ''
 
   return (
     <div className={s.mainContainer}>
@@ -50,12 +55,12 @@ export function Counter (props: CounterType) {
       </div>
       <div className={s.buttonContainer}>
         <CustomButton
-          title = 'inc'
+          title="inc"
           disabled={disabledInc}
-          onClick = {upCounter}
+          onClick={upCounter}
         />
         <CustomButton
-          title = 'reset'
+          title="reset"
           disabled={disabledReset}
           onClick={resetCounter}
         />
