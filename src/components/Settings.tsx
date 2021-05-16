@@ -32,15 +32,11 @@ export function Settings(props: SettingsType) {
 
   // анализ на ошибки + установка сообщения вместо value
   useEffect(() => {
-    console.log('maxValueTmp='+maxValueTmp)
-    console.log('startValueTmp='+startValueTmp)
     if (startValueTmp < 0 || maxValueTmp === 0 || startValueTmp >= maxValueTmp ) {
       statusMessage = 'Incorrect Value!'
-      console.log(statusMessage)
       setButtonSetStatus(true)
     } else {
       statusMessage = 'enter values and press set'
-      console.log(statusMessage)
       setButtonSetStatus(false)
     }
     setValue(statusMessage)
@@ -76,19 +72,29 @@ export function Settings(props: SettingsType) {
     setButtonSetStatus(true)
   }
 
+  //логика для формирования красной подсветки input: in progress...
+  let errorClsSV = '';
+  let errorClsBoth = '';
+  // мне пришлось писать это не в useEffect. Не знаю почему в нём не работало, но без почему то работает.
+  if (startValueTmp < 0) errorClsSV = sS.error; else errorClsSV = ''
+  if (startValueTmp >= maxValueTmp) errorClsBoth = sS.error
+
+
   return (
     <div className={sU.mainContainer}>
       <div className={sU.valueContainer}>
         <div className={sS.sText}>
           <span>max value:</span>
-          <input type="number"
+          <input className={errorClsBoth}
+                 type="number"
                  value={maxValueTmp}
                  onChange={onChangeMaxHandler}
           />
         </div>
         <div className={sS.sText}>
           <span>start value:</span>
-          <input type="number"
+          <input className={`${errorClsSV} ${errorClsBoth}`}
+                 type="number"
                  value={startValueTmp}
                  onChange={onChangeStartHandler}
           />
