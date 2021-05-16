@@ -6,8 +6,9 @@ import sS from './Settings.module.css'
 type SettingsType = {
   startValue: number
   setStartValue: (startValue: number) => void
-  maxValue: number;
+  maxValue: number
   setMaxValue: (maxValue: number) => void
+  value: number | string
   setValue: (value: number | string) => void
 }
 
@@ -16,6 +17,8 @@ export function Settings(props: SettingsType) {
   const setStartValue = props.setStartValue
   let maxValue = props.maxValue
   const setMaxValue = props.setMaxValue
+  const value = props.value
+  const setValue = props.setValue
 
   //временные стартовые и максимальные значение, которые потом при нажатии set перейдут в общие (хранящиеся в app)
   let startValueStr = localStorage.getItem('startValue')
@@ -23,83 +26,44 @@ export function Settings(props: SettingsType) {
   let maxValueStr = localStorage.getItem('maxValue')
   let [maxValueTmp, setMaxValueTmp] = useState<number>(maxValueStr ? JSON.parse(maxValueStr) : 5)
 
-  // Анализ максимального и стартового значения на ошибки
-  // 0 - no errors
-  // 1 - error in start value
-  // 2 - error in max value
-  // 3 - error in both value
-  // ! все запаздывают. Получается надо сам анализ делать тоже в useEffect
-  /*function goodAndBadValues(maxValueIn: number, startValueIn: number): number {
-    console.log('maxValueTmp='+maxValueIn)
-    console.log('startValueTmp='+startValueIn)
-    // debugger
-    if (startValueIn < 0) {
-      // console.log(1)
-      setStatusMessage('Incorrect Value!')
-      console.log(statusMessage)
-      console.log(1)
-      return 1
-    }
-    else if (maxValueIn === 0) {
-      // console.log(2)
-      setStatusMessage('Incorrect Value!')
-      console.log(statusMessage)
-      console.log(2)
-      return 2
-
-    }
-    else if (maxValueIn < startValueIn) {
-      // console.log(3)
-      setStatusMessage('Incorrect Value!')
-      console.log(statusMessage)
-      console.log(3)
-      return 3
-    }
-    else if (maxValueIn === startValueIn) {
-      // console.log(3)
-      setStatusMessage('Incorrect Value!')
-      console.log(statusMessage)
-      console.log('3_2')
-      return 3
-    }
-    else {
-      setStatusMessage('enter values and press set')
-      console.log(statusMessage)
-      console.log(0)
-      return 0
-    }
-  }*/
-
   let [messageErrorStatus, setMessageErrorStatus] = useState<number>(0)
-  let [statusMessage, setStatusMessage] = useState<string>('')
+  let statusMessage = ''
+  let [buttonSetStatus,setButtonSetStatus ] = useState<boolean>(false)
 
+  // анализ на ошибки + установка сообщения вместо value
   useEffect(() => {
     console.log('maxValueTmp='+maxValueTmp)
     console.log('startValueTmp='+startValueTmp)
     if (startValueTmp < 0 || maxValueTmp === 0 || startValueTmp >= maxValueTmp ) {
-      setStatusMessage('Incorrect Value!')
+      statusMessage = 'Incorrect Value!'
       console.log(statusMessage)
+      setButtonSetStatus(true)
     } else {
-      setStatusMessage('enter values and press set')
+      statusMessage = 'enter values and press set'
       console.log(statusMessage)
+      setButtonSetStatus(false)
     }
+    setValue(statusMessage)
   },[startValueTmp, maxValueTmp, statusMessage])
+
+  // таким образом исправляю ошибку затирания стартового значения от наблюдения за startValueTmp и maxValueTmp
+  useEffect(() => {
+    props.setStartValue(startValueTmp)
+    props.setValue(startValueTmp)
+    props.setMaxValue(maxValueTmp)
+  }, [])
 
   function goodAndBadValueMessage() {
     if (messageErrorStatus === 0) return 'enter values and press set'
     else return 'Incorrect Value!'
   }
 
-  // handlers for settings + установка временно сообщения вместо value
+  // handlers for settings
   const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement> ) => {
-    // props.setValue('enter values and press set')
-    // goodAndBadValues(maxValueTmp, startValueTmp)
     setMaxValueTmp(JSON.parse(e.currentTarget.value))
-    props.setValue(statusMessage)
   }
   const onChangeStartHandler = (e: ChangeEvent<HTMLInputElement> ) => {
     setStartValueTmp(JSON.parse(e.currentTarget.value))
-    props.setValue(statusMessage)
   }
 
   // write to localStorage on set click & app states
@@ -109,6 +73,7 @@ export function Settings(props: SettingsType) {
     localStorage.setItem('startValue', JSON.stringify(startValueTmp))
     props.setMaxValue(maxValueTmp)
     localStorage.setItem('maxValue', JSON.stringify(maxValueTmp))
+    setButtonSetStatus(true)
   }
 
   return (
@@ -132,7 +97,7 @@ export function Settings(props: SettingsType) {
       </div>
       <div className={sU.buttonContainer}>
         <CustomButton title='Set'
-                      disabled={false}
+                      disabled={buttonSetStatus}
                       onClick={setHandler} />
       </div>
     </div>

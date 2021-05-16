@@ -31,6 +31,9 @@ export function Counter (props: CounterType) {
     if (typeof value == 'number') {
       NewValue = ++value;
       setValue(NewValue)
+    } else {
+      console.log('disable inc')
+      console.log('disable reset')
     }
   }
   function resetCounter() {
