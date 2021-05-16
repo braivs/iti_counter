@@ -3,12 +3,6 @@ import './App.css';
 import {Counter} from './components/Counter';
 import {Settings} from './components/Settings';
 
-/*
-мысли по доработке:
-упрощать логику возможно надо. Делать без tmp значений
-Сейчас проблема что стартовое значение value сразу месседж
-* */
-
 function App() {
   //вынес стейт из компонент и передаю его в пропсы
   let startValueStr = localStorage.getItem('startValue')
