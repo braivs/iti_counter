@@ -3,10 +3,10 @@
   flex-direction: column;
   border: 2px solid #63DAFC;
   border-radius: 10px;
-  width: 300px;
-  height: 250px;
+  width: 500px;
+  height: 300px;
   align-items: center;
-  font-size: 50px;
+  font-size: 30px;
   justify-content: space-around;
   margin-right: 50px;
 }
@@ -14,7 +14,7 @@
 .valueContainer {
   border: 2px solid #63DAFC;
   background: #292C35;
-  width: 280px;
+  width: 400px;
   height: 120px;
   text-align: center;
   border-radius: 10px;
@@ -25,7 +25,7 @@
   display: flex;
   justify-content: space-around;
   border: 2px solid #63DAFC;
-  width: 280px;
+  width: 400px;
   border-radius: 10px;
   padding-bottom: 15px;
 }

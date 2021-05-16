@@ -5,8 +5,8 @@ import {CustomButton} from './CustomButton';
 type CounterType = {
   startValue: number
   maxValue: number
-  value: number
-  setValue: (value: number) => void
+  value: number | string
+  setValue: (value: number | string) => void
 }
 
 export function Counter (props: CounterType) {
@@ -27,8 +27,11 @@ export function Counter (props: CounterType) {
     [value, maxValue, startValue])
 
   function upCounter() {
-    let NewValue = ++value;
-    setValue(NewValue)
+    let NewValue
+    if (typeof value == 'number') {
+      NewValue = ++value;
+      setValue(NewValue)
+    }
   }
   function resetCounter() {
     setValue(startValue);

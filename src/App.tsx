@@ -10,7 +10,7 @@ function App() {
   let maxValueStr = localStorage.getItem('maxValue')
   let [maxValue, setMaxValue] = useState<number>(maxValueStr ? JSON.parse(maxValueStr) : 5)
 
-  let [value, setValue] = useState<number>(startValue)
+  let [value, setValue] = useState<number | string>(startValue)
 
   return (
     <div className="App">
