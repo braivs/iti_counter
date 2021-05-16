@@ -1,27 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Counter} from './components/Counter';
 import {Settings} from './components/Settings';
 
 function App() {
-
-  //сюда вынести стейт
-  //передавать его в пропсы
-
-  // --- не надо: useEffect проверяет localStorage и если он изменился перезаписывает стейт
-  // -Скорее по кнопке set надо передавать
-
-  // стейт передавать в счётчик
-
-  // либо чтобы не выносить в каунтере следить за измением localStorage
-
-  // Зачем CustomButton не понятно и что туда выносить
-
-
+  //вынес стейт из компонент и передаю его в пропсы
+  let [startValue, setStartValue] = useState<number>(0)
+  let [maxValue, setMaxValue] = useState<number>(0)
 
   return (
     <div className="App">
-      <Settings />
+      <Settings
+        startValue={startValue}
+        setStartValue={setStartValue}
+        maxValue={maxValue}
+        setMaxValue={setMaxValue}
+      />
       <Counter />
     </div>
   );

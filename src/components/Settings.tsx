@@ -3,9 +3,18 @@ import sU from './Universe.module.css'
 import {CustomButton} from './CustomButton';
 import sS from './Settings.module.css'
 
-export function Settings() {
-  let [maxValue, setMaxValue] = useState<number>(0)
-  let [startValue, setStartValue] = useState<number>(0)
+type SettingsType = {
+  startValue: number
+  setStartValue: (startValue: number) => void
+  maxValue: number;
+  setMaxValue: (maxValue: number) => void
+}
+
+export function Settings(props: SettingsType) {
+  let startValue = props.startValue
+  const setStartValue = props.setStartValue
+  let maxValue = props.maxValue
+  const setMaxValue = props.setMaxValue
 
   //counter settings on start
   useEffect(() => {
