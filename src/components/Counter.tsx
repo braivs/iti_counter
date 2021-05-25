@@ -7,6 +7,7 @@ type CounterType = {
   maxValue: number
   value: number | string
   setValue: (value: number | string) => void
+  isMessage: boolean
 }
 
 export function Counter(props: CounterType) {
@@ -45,13 +46,16 @@ export function Counter(props: CounterType) {
     setValue(startValue);
   }
 
-  //красный цвет счётчика, когда максимум
+  //красный цвет счётчика, когда максимум и сообщение об ошибке
   const valueClass = (value === maxValue || value === 'Incorrect Value!') ? s.maxValueColor : ''
 
   return (
     <div className={s.mainContainer}>
       <div className={s.valueContainer}>
-        <span className={`${s.value} ${valueClass}`}>{value}</span>
+
+        {/*<span className={`${s.value} ${valueClass}`}>{value}</span>*/}
+        <span>{props.isMessage ? 'entervalues':  value}</span>
+
       </div>
       <div className={s.buttonContainer}>
         <CustomButton
