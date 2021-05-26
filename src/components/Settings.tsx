@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import sU from './Universe.module.css'
 import {CustomButton} from './CustomButton';
 import sS from './Settings.module.css'
@@ -14,9 +14,6 @@ type SettingsType = {
 }
 
 export function Settings(props: SettingsType) {
-  let [messageErrorStatus, setMessageErrorStatus] = useState<number>(0)
-  let statusMessage = ''
-
   // handlers for settings
   const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement> ) => {
     props.maxValueHandler(e.currentTarget.valueAsNumber)

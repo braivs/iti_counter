@@ -23,7 +23,6 @@ function App() {
 
   let [value, setValue] = useState<number>(startValue) // выводимое значение счётчика
   let [isMessage, setIsMessage] = useState(false) // показывать или нет сообщения вместо value
-  let messageText = ''; // тест сообщения
   let [isError, setIsError] = useState(false) // есть ли ошибка
 
   // обработчик для кнопки set в settings

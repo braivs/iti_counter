@@ -13,21 +13,25 @@ type CounterType = {
 
 export function Counter(props: CounterType) {
 
-  let [disabledInc, setDisabledInc] = useState<boolean>(false)
-  let [disabledReset, setDisabledReset] = useState<boolean>(false)
-
   // блокировка кнопок по условиям
+  let [disabledInc, setDisabledInc] = useState(false)
+  let [disabledReset, setDisabledReset] = useState(false)
   useEffect(() => {
       if (props.isMessage) {
         setDisabledInc(true)
         setDisabledReset(true)
-      }
-      else {
+      } else if (props.value === props.startValue) {
+        setDisabledInc(false)
+        setDisabledReset(true)
+      } else if (props.maxValue === props.value) {
+        setDisabledInc(true)
+        setDisabledReset(false)
+      } else {
         setDisabledInc(false)
         setDisabledReset(false)
       }
     },
-    [props.isMessage])
+    [props.isMessage, props.value, props.startValue, props.maxValue])
 
   function upCounter() {
     let NewValue
@@ -41,13 +45,19 @@ export function Counter(props: CounterType) {
     props.setValue(props.startValue);
   }
 
-  if (props.isMessage) {}
+  // Формирование разных цветов счётчика по условиям
+  let [valueClass, setValueClass] = useState<string>('')
+  useEffect(() => {
+    if (props.isError || (props.maxValue === props.value && !props.isMessage)) {
+      setValueClass(s.redValueColor)
+    } else {
+      setValueClass('')
+    }
+  }, [props.isMessage, props.isError, props.value, props.maxValue, valueClass, setValueClass])
 
-  //красный цвет счётчика, когда максимум или ошибка
-  let valueClass = (props.value === props.maxValue || props.isError) ? s.maxValueColor : ''
+
   // разные сообщения в зависимости от наличия ошибки
   let messageText = (props.isError) ? 'Incorrect value!' : 'enter values and press set'
-
 
   return (
     <div className={s.mainContainer}>
