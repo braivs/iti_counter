@@ -3,6 +3,7 @@ import './App.css';
 import {Counter} from './components/Counter';
 import {Settings} from './components/Settings';
 import {SettingsWithCounter} from './components/SettingsWithCounter';
+import {NavLink} from 'react-router-dom';
 
 function App() {
   // стартовое и максимальные значения
@@ -87,31 +88,41 @@ function App() {
 
   return (
     <div className="App">
-      <Settings startValue={startValue}
-                startValueHandler={startValueHandler}
-                maxValue={maxValue}
-                maxValueHandler={maxValueHandler}
-                value={value}
-                setValuesByButton={setValuesHandler}
-                isError={isError}
-      />
-      <Counter startValue={startValue}
-               maxValue={maxValue}
-               value={value}
-               setValue={setValue}
-               isMessage={isMessage}
-               isError={isError}
-               incButtonHandler={incButtonHandler}
-               resetButtonHandler={resetButtonHandler}
-               isIncButtonDisabled={isIncButtonDisabled}
-               isResetButtonDisabled={isResetButtonDisabled}
-      />
-      <SettingsWithCounter value={value}
-                           incButtonHandler={incButtonHandler}
-                           resetButtonHandler={resetButtonHandler}
-                           isIncButtonDisabled={isIncButtonDisabled}
-                           isResetButtonDisabled={isResetButtonDisabled}
-      />
+      <div className={'navbar'}>
+        <div className='navItem'>
+          <NavLink to="/counter2">Counter 2</NavLink>
+        </div>
+        <div className='navItem'>
+          <NavLink to="/counter2.1">Counter 2.1</NavLink>
+        </div>
+      </div>
+      <div className="counterBox">
+        <Settings startValue={startValue}
+                  startValueHandler={startValueHandler}
+                  maxValue={maxValue}
+                  maxValueHandler={maxValueHandler}
+                  value={value}
+                  setValuesByButton={setValuesHandler}
+                  isError={isError}
+        />
+        <Counter startValue={startValue}
+                 maxValue={maxValue}
+                 value={value}
+                 setValue={setValue}
+                 isMessage={isMessage}
+                 isError={isError}
+                 incButtonHandler={incButtonHandler}
+                 resetButtonHandler={resetButtonHandler}
+                 isIncButtonDisabled={isIncButtonDisabled}
+                 isResetButtonDisabled={isResetButtonDisabled}
+        />
+        <SettingsWithCounter value={value}
+                             incButtonHandler={incButtonHandler}
+                             resetButtonHandler={resetButtonHandler}
+                             isIncButtonDisabled={isIncButtonDisabled}
+                             isResetButtonDisabled={isResetButtonDisabled}
+        />
+      </div>
     </div>
   );
 }
