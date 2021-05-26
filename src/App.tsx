@@ -9,12 +9,13 @@ function App() {
   let [startValue, setStartValue] = useState(0)
   let [maxValue, setMaxValue] = useState(5)
 
-  // при загрузке приложения стартовое и максимальные значения получаются из localstorage
+  // при загрузке приложения стартовое, максимальное и текущее значения получаются из localstorage
   useEffect(() => {
     let localStorageStartValueStr = localStorage.getItem('startValue')
     let localStorageMaxValueStr = localStorage.getItem('maxValue')
     if (localStorageStartValueStr) {
       setStartValue(JSON.parse(localStorageStartValueStr))
+      setValue(JSON.parse(localStorageStartValueStr))
     }
     if (localStorageMaxValueStr) {
       setMaxValue(JSON.parse(localStorageMaxValueStr))
@@ -33,12 +34,11 @@ function App() {
     setValue(startValue)
   }
 
-  // формирование ошибки или сообщения
+  // формирование ошибки
   useEffect(() => {
-    let error = (maxValue <= startValue || startValue < 0) ? true : false
+    let error = (maxValue <= startValue || startValue < 0)
     setIsError(error)
   }, [startValue, maxValue])
-
 
   // обработчик для изменения стартового значения в settings
   const startValueHandler = (value: number) => {
@@ -50,6 +50,20 @@ function App() {
   const maxValueHandler = (value: number) => {
     setIsMessage(true) // показ месседжа вместо value
     setMaxValue(value)
+  }
+
+  //увеличить счётчик на один вверх
+  function incButtonHandler() {
+    let NewValue
+    NewValue = value;
+    NewValue++;
+    setValue(NewValue)
+
+  }
+
+  //сбросить счётчик
+  function resetButtonHandler() {
+    setValue(startValue);
   }
 
   return (
@@ -68,8 +82,13 @@ function App() {
                setValue={setValue}
                isMessage={isMessage}
                isError={isError}
+               incButtonHandler={incButtonHandler}
+               resetButtonHandler={resetButtonHandler}
       />
-      {/*<SettingsWithCounter />*/}
+      <SettingsWithCounter value={value}
+                           incButtonHandler={incButtonHandler}
+                           resetButtonHandler={resetButtonHandler}
+      />
     </div>
   );
 }

@@ -2,16 +2,18 @@ import React, {useEffect, useState} from 'react';
 import s from './Universe.module.css'
 import {CustomButton} from './CustomButton';
 
-type CounterType = {
+type CounterPropsType = {
   startValue: number
   maxValue: number
   value: number
   setValue: (value: number) => void
   isMessage: boolean
   isError: boolean
+  incButtonHandler: () => void
+  resetButtonHandler: () => void
 }
 
-export function Counter(props: CounterType) {
+export function Counter(props: CounterPropsType) {
 
   // блокировка кнопок по условиям
   let [disabledInc, setDisabledInc] = useState(false)
@@ -33,27 +35,17 @@ export function Counter(props: CounterType) {
     },
     [props.isMessage, props.value, props.startValue, props.maxValue])
 
-  function upCounter() {
-    let NewValue
-    NewValue = props.value;
-    NewValue++;
-    props.setValue(NewValue)
 
-  }
-
-  function resetCounter() {
-    props.setValue(props.startValue);
-  }
 
   // Формирование разных цветов счётчика по условиям
-  let [valueClass, setValueClass] = useState<string>('')
+  let [valueClass, setValueClass] = useState('')
   useEffect(() => {
     if (props.isError || (props.maxValue === props.value && !props.isMessage)) {
       setValueClass(s.redValueColor)
     } else {
       setValueClass('')
     }
-  }, [props.isMessage, props.isError, props.value, props.maxValue, valueClass, setValueClass])
+  }, [props.isMessage, props.isError, props.value, props.maxValue, setValueClass])
 
 
   // разные сообщения в зависимости от наличия ошибки
@@ -71,12 +63,12 @@ export function Counter(props: CounterType) {
         <CustomButton
           title="inc"
           disabled={disabledInc}
-          onClick={upCounter}
+          onClick={props.incButtonHandler}
         />
         <CustomButton
           title="reset"
           disabled={disabledReset}
-          onClick={resetCounter}
+          onClick={props.resetButtonHandler}
         />
       </div>
     </div>

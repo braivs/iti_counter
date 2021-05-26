@@ -3,7 +3,7 @@ import sU from './Universe.module.css'
 import {CustomButton} from './CustomButton';
 import sS from './Settings.module.css'
 
-type SettingsType = {
+type SettingsPropsType = {
   startValue: number
   startValueHandler: (startValue: number) => void
   maxValue: number
@@ -13,7 +13,7 @@ type SettingsType = {
   isError: boolean
 }
 
-export function Settings(props: SettingsType) {
+export function Settings(props: SettingsPropsType) {
   // handlers for settings
   const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement> ) => {
     props.maxValueHandler(e.currentTarget.valueAsNumber)
