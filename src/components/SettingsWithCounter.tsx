@@ -7,6 +7,8 @@ type SettingsWithCounterPropsType = {
   value: number
   incButtonHandler: () => void
   resetButtonHandler: () => void
+  isIncButtonDisabled: boolean
+  isResetButtonDisabled: boolean
 }
 
 export function SettingsWithCounter(props: SettingsWithCounterPropsType) {
@@ -19,12 +21,12 @@ export function SettingsWithCounter(props: SettingsWithCounterPropsType) {
     <div className={s.buttonContainer}>
       <CustomButton
         title="inc"
-        disabled={false}
+        disabled={props.isIncButtonDisabled}
         onClick={props.incButtonHandler}
       />
       <CustomButton
         title="reset"
-        disabled={false}
+        disabled={props.isResetButtonDisabled}
         onClick={props.resetButtonHandler}
       />
       <CustomButton

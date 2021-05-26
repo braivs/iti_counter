@@ -40,13 +40,13 @@ function App() {
     setIsError(error)
   }, [startValue, maxValue])
 
-  // обработчик для изменения стартового значения в settings
+  // изменение стартового значения в settings
   const startValueHandler = (value: number) => {
     setIsMessage(true) // показ месседжа вместо value
     setStartValue(value)
   }
 
-  // обработчик для изменения максимального значения в settings
+  // изменение максимального значения в settings
   const maxValueHandler = (value: number) => {
     setIsMessage(true) // показ месседжа вместо value
     setMaxValue(value)
@@ -58,13 +58,32 @@ function App() {
     NewValue = value;
     NewValue++;
     setValue(NewValue)
-
   }
 
   //сбросить счётчик
   function resetButtonHandler() {
     setValue(startValue);
   }
+
+  // блокировка кнопок Inc и Reset по условиям
+  let [isIncButtonDisabled, setIsIncButtonDisabled] = useState(false)
+  let [isResetButtonDisabled, setIsResetButtonDisabled] = useState(false)
+  useEffect(() => {
+      if (isMessage) {
+        setIsIncButtonDisabled(true)
+        setIsResetButtonDisabled(true)
+      } else if (value === startValue) {
+        setIsIncButtonDisabled(false)
+        setIsResetButtonDisabled(true)
+      } else if (maxValue === value) {
+        setIsIncButtonDisabled(true)
+        setIsResetButtonDisabled(false)
+      } else {
+        setIsIncButtonDisabled(false)
+        setIsResetButtonDisabled(false)
+      }
+    },
+    [isMessage, value, startValue, maxValue])
 
   return (
     <div className="App">
@@ -84,10 +103,14 @@ function App() {
                isError={isError}
                incButtonHandler={incButtonHandler}
                resetButtonHandler={resetButtonHandler}
+               isIncButtonDisabled={isIncButtonDisabled}
+               isResetButtonDisabled={isResetButtonDisabled}
       />
       <SettingsWithCounter value={value}
                            incButtonHandler={incButtonHandler}
                            resetButtonHandler={resetButtonHandler}
+                           isIncButtonDisabled={isIncButtonDisabled}
+                           isResetButtonDisabled={isResetButtonDisabled}
       />
     </div>
   );

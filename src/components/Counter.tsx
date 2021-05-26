@@ -11,31 +11,11 @@ type CounterPropsType = {
   isError: boolean
   incButtonHandler: () => void
   resetButtonHandler: () => void
+  isIncButtonDisabled: boolean
+  isResetButtonDisabled: boolean
 }
 
 export function Counter(props: CounterPropsType) {
-
-  // блокировка кнопок по условиям
-  let [disabledInc, setDisabledInc] = useState(false)
-  let [disabledReset, setDisabledReset] = useState(false)
-  useEffect(() => {
-      if (props.isMessage) {
-        setDisabledInc(true)
-        setDisabledReset(true)
-      } else if (props.value === props.startValue) {
-        setDisabledInc(false)
-        setDisabledReset(true)
-      } else if (props.maxValue === props.value) {
-        setDisabledInc(true)
-        setDisabledReset(false)
-      } else {
-        setDisabledInc(false)
-        setDisabledReset(false)
-      }
-    },
-    [props.isMessage, props.value, props.startValue, props.maxValue])
-
-
 
   // Формирование разных цветов счётчика по условиям
   let [valueClass, setValueClass] = useState('')
@@ -46,7 +26,6 @@ export function Counter(props: CounterPropsType) {
       setValueClass('')
     }
   }, [props.isMessage, props.isError, props.value, props.maxValue, setValueClass])
-
 
   // разные сообщения в зависимости от наличия ошибки
   let messageText = (props.isError) ? 'Incorrect value!' : 'enter values and press set'
@@ -62,12 +41,12 @@ export function Counter(props: CounterPropsType) {
       <div className={s.buttonContainer}>
         <CustomButton
           title="inc"
-          disabled={disabledInc}
+          disabled={props.isIncButtonDisabled}
           onClick={props.incButtonHandler}
         />
         <CustomButton
           title="reset"
-          disabled={disabledReset}
+          disabled={props.isResetButtonDisabled}
           onClick={props.resetButtonHandler}
         />
       </div>
