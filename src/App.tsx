@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import './App.scss';
 import {Counter} from './components/Counter';
 import {Settings} from './components/Settings';
 import {SettingsWithCounter} from './components/SettingsWithCounter';
-import {NavLink} from 'react-router-dom';
+import {Navbar} from './components/Navbar/Navbar';
 
 function App() {
   // стартовое и максимальные значения
@@ -88,14 +88,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className={'navbar'}>
-        <div className='navItem'>
-          <NavLink to="/counter2">Counter 2</NavLink>
-        </div>
-        <div className='navItem'>
-          <NavLink to="/counter2.1">Counter 2.1</NavLink>
-        </div>
-      </div>
+      <Navbar />
       <div className="counterBox">
         <Settings startValue={startValue}
                   startValueHandler={startValueHandler}
