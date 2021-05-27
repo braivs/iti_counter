@@ -9,13 +9,9 @@ type Main2PropsType = {
   setValue: (value: number) => void
   isMessage: boolean
   isError: boolean
-  incButtonHandler: () => void
-  resetButtonHandler: () => void
-  isIncButtonDisabled: boolean
-  isResetButtonDisabled: boolean
 }
 
-export function Main2(props: Main2PropsType) {
+export function Main(props: Main2PropsType) {
 
   // Формирование разных цветов счётчика по условиям
   let [valueClass, setValueClass] = useState('')
@@ -30,6 +26,39 @@ export function Main2(props: Main2PropsType) {
   // разные сообщения в зависимости от наличия ошибки
   let messageText = (props.isError) ? 'Incorrect value!' : 'enter values and press set'
 
+  //увеличить счётчик на один вверх
+  function incButtonHandler() {
+    let NewValue
+    NewValue = props.value;
+    NewValue++;
+    props.setValue(NewValue)
+  }
+
+  //сбросить счётчик
+  function resetButtonHandler() {
+    props.setValue(props.startValue);
+  }
+
+  // блокировка кнопок Inc и Reset по условиям
+  let [isIncButtonDisabled, setIsIncButtonDisabled] = useState(false)
+  let [isResetButtonDisabled, setIsResetButtonDisabled] = useState(false)
+  useEffect(() => {
+      if (props.isMessage) {
+        setIsIncButtonDisabled(true)
+        setIsResetButtonDisabled(true)
+      } else if (props.value === props.startValue) {
+        setIsIncButtonDisabled(false)
+        setIsResetButtonDisabled(true)
+      } else if (props.maxValue === props.value) {
+        setIsIncButtonDisabled(true)
+        setIsResetButtonDisabled(false)
+      } else {
+        setIsIncButtonDisabled(false)
+        setIsResetButtonDisabled(false)
+      }
+    },
+    [props.isMessage, props.value, props.startValue, props.maxValue])
+
   return (
     <div className={s.mainContainer}>
       <div className={s.valueContainer}>
@@ -41,13 +70,13 @@ export function Main2(props: Main2PropsType) {
       <div className={s.buttonContainer}>
         <CustomButton
           title="inc"
-          disabled={props.isIncButtonDisabled}
-          onClick={props.incButtonHandler}
+          disabled={isIncButtonDisabled}
+          onClick={incButtonHandler}
         />
         <CustomButton
           title="reset"
-          disabled={props.isResetButtonDisabled}
-          onClick={props.resetButtonHandler}
+          disabled={isResetButtonDisabled}
+          onClick={resetButtonHandler}
         />
       </div>
     </div>

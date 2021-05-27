@@ -1,5 +1,5 @@
 import React from 'react';
-import {Main2} from './Main2';
+import {Main} from '../Main/Main';
 import {Settings} from '../Settings/Settings';
 import s from './Counter2.module.scss'
 
@@ -10,10 +10,6 @@ type Counter2PropsType = {
   setValue: (value: number) => void
   isMessage: boolean
   isError: boolean
-  incButtonHandler: () => void
-  resetButtonHandler: () => void
-  isIncButtonDisabled: boolean
-  isResetButtonDisabled: boolean
   startValueHandler: (startValue: number) => void
   maxValueHandler: (maxValue: number) => void
   setValuesByButton: () => void
@@ -30,16 +26,12 @@ export function Counter2(props: Counter2PropsType) {
                 setValuesByButton={props.setValuesByButton}
                 isError={props.isError}
       />
-      <Main2 startValue={props.startValue}
-             maxValue={props.maxValue}
-             value={props.value}
-             setValue={props.setValue}
-             isMessage={props.isMessage}
-             isError={props.isError}
-             incButtonHandler={props.incButtonHandler}
-             resetButtonHandler={props.resetButtonHandler}
-             isIncButtonDisabled={props.isIncButtonDisabled}
-             isResetButtonDisabled={props.isResetButtonDisabled}
+      <Main startValue={props.startValue}
+            maxValue={props.maxValue}
+            value={props.value}
+            setValue={props.setValue}
+            isMessage={props.isMessage}
+            isError={props.isError}
       />
     </div>
   )

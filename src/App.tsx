@@ -53,38 +53,7 @@ function App() {
     setMaxValue(value)
   }
 
-  //увеличить счётчик на один вверх
-  function incButtonHandler() {
-    let NewValue
-    NewValue = value;
-    NewValue++;
-    setValue(NewValue)
-  }
 
-  //сбросить счётчик
-  function resetButtonHandler() {
-    setValue(startValue);
-  }
-
-  // блокировка кнопок Inc и Reset по условиям
-  let [isIncButtonDisabled, setIsIncButtonDisabled] = useState(false)
-  let [isResetButtonDisabled, setIsResetButtonDisabled] = useState(false)
-  useEffect(() => {
-      if (isMessage) {
-        setIsIncButtonDisabled(true)
-        setIsResetButtonDisabled(true)
-      } else if (value === startValue) {
-        setIsIncButtonDisabled(false)
-        setIsResetButtonDisabled(true)
-      } else if (maxValue === value) {
-        setIsIncButtonDisabled(true)
-        setIsResetButtonDisabled(false)
-      } else {
-        setIsIncButtonDisabled(false)
-        setIsResetButtonDisabled(false)
-      }
-    },
-    [isMessage, value, startValue, maxValue])
 
   return (
     <div className="App">
@@ -97,16 +66,12 @@ function App() {
         setValue={setValue}
         isMessage={isMessage}
         isError={isError}
-        incButtonHandler={incButtonHandler}
-        resetButtonHandler={resetButtonHandler}
-        isIncButtonDisabled={isIncButtonDisabled}
-        isResetButtonDisabled={isResetButtonDisabled}
         startValueHandler={startValueHandler}
         maxValueHandler={maxValueHandler}
         setValuesByButton={setValuesHandler}
       />}
       />
-      <Route path="/counter2.1" render={() => <Counter21
+      {/*<Route path="/counter2.1" render={() => <Counter21
         startValue={startValue}
         maxValue={maxValue}
         value={value}
@@ -119,7 +84,7 @@ function App() {
         maxValueHandler={maxValueHandler}
         setValuesByButton={setValuesHandler}
       />}
-      />
+      />*/}
     </div>
   );
 }
