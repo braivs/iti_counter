@@ -3,7 +3,7 @@ import './App.scss';
 import {Navbar} from './components/Navbar/Navbar';
 import {Redirect, Route} from 'react-router-dom';
 import {Counter2} from './components/Counter2/Counter2';
-import {Counter21} from './components/Counter21/Counter21';
+import {Counter21} from './components/Counter21';
 
 function App() {
   // стартовое и максимальные значения

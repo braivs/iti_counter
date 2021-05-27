@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import s from '../Universe.module.css'
-import {CustomButton} from '../CustomButton';
+import s from './Universe.module.css'
+import {CustomButton} from './CustomButton';
 import {useHistory} from 'react-router-dom';
 
 type MainPropsType = {

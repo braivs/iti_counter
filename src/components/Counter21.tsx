@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, useHistory} from 'react-router-dom';
-import {Settings} from '../Settings/Settings';
-import {Main} from '../Main/Main';
+import {Settings} from './Settings/Settings';
+import {Main} from './Main';
 
 type Counter21PropsType = {
   startValue: number
