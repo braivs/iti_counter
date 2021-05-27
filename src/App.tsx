@@ -53,8 +53,6 @@ function App() {
     setMaxValue(value)
   }
 
-
-
   return (
     <div className="App">
       <Navbar/>
@@ -71,20 +69,18 @@ function App() {
         setValuesByButton={setValuesHandler}
       />}
       />
-      {/*<Route path="/counter2.1" render={() => <Counter21
+      <Route path="/counter2.1" render={() => <Counter21
         startValue={startValue}
         maxValue={maxValue}
         value={value}
+        setValue={setValue}
+        isMessage={isMessage}
         isError={isError}
-        incButtonHandler={incButtonHandler}
-        resetButtonHandler={resetButtonHandler}
-        isIncButtonDisabled={isIncButtonDisabled}
-        isResetButtonDisabled={isResetButtonDisabled}
         startValueHandler={startValueHandler}
         maxValueHandler={maxValueHandler}
         setValuesByButton={setValuesHandler}
       />}
-      />*/}
+      />
     </div>
   );
 }

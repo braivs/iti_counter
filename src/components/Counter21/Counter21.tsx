@@ -1,18 +1,15 @@
 import React from 'react';
-import {Main21} from './Main21';
-import {Redirect, Route} from 'react-router-dom';
+import {Route, useHistory} from 'react-router-dom';
 import {Settings} from '../Settings/Settings';
-import {useHistory} from 'react-router-dom';
+import {Main} from '../Main/Main';
 
 type Counter21PropsType = {
   startValue: number
   maxValue: number
   value: number
+  setValue: (value: number) => void
+  isMessage: boolean
   isError: boolean
-  incButtonHandler: () => void
-  resetButtonHandler: () => void
-  isIncButtonDisabled: boolean
-  isResetButtonDisabled: boolean
   startValueHandler: (startValue: number) => void
   maxValueHandler: (maxValue: number) => void
   setValuesByButton: () => void
@@ -29,11 +26,13 @@ export function Counter21(props: Counter21PropsType) {
   return (
     <div>
       <Route exact path="/counter2.1" render={() =>
-        <Main21 value={props.value}
-                incButtonHandler={props.incButtonHandler}
-                resetButtonHandler={props.resetButtonHandler}
-                isIncButtonDisabled={props.isIncButtonDisabled}
-                isResetButtonDisabled={props.isResetButtonDisabled}
+        <Main type={'Counter21'}
+              startValue={props.startValue}
+              maxValue={props.maxValue}
+              value={props.value}
+              setValue={props.setValue}
+              isMessage={props.isMessage}
+              isError={props.isError}
         />}/>
       <Route exact path="/counter2.1/settings" render={() =>
         <Settings startValue={props.startValue}

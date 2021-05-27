@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import s from '../Universe.module.css'
 import {CustomButton} from '../CustomButton';
+import {useHistory} from 'react-router-dom';
 
-type Main2PropsType = {
+type MainPropsType = {
+  type: 'Counter2' | 'Counter21'
   startValue: number
   maxValue: number
   value: number
@@ -11,7 +13,7 @@ type Main2PropsType = {
   isError: boolean
 }
 
-export function Main(props: Main2PropsType) {
+export function Main(props: MainPropsType) {
 
   // Формирование разных цветов счётчика по условиям
   let [valueClass, setValueClass] = useState('')
@@ -27,7 +29,7 @@ export function Main(props: Main2PropsType) {
   let messageText = (props.isError) ? 'Incorrect value!' : 'enter values and press set'
 
   //увеличить счётчик на один вверх
-  function incButtonHandler() {
+  const incButtonHandler = () => {
     let NewValue
     NewValue = props.value;
     NewValue++;
@@ -35,8 +37,14 @@ export function Main(props: Main2PropsType) {
   }
 
   //сбросить счётчик
-  function resetButtonHandler() {
+  const resetButtonHandler = () => {
     props.setValue(props.startValue);
+  }
+
+  // set для Counter 2.1
+  const history = useHistory()
+  const setButtonHandler = () => {
+    history.push('/counter2.1/settings')
   }
 
   // блокировка кнопок Inc и Reset по условиям
@@ -59,26 +67,36 @@ export function Main(props: Main2PropsType) {
     },
     [props.isMessage, props.value, props.startValue, props.maxValue])
 
-  return (
-    <div className={s.mainContainer}>
-      <div className={s.valueContainer}>
+  if (props.type === 'Counter2') {
+    return (
+      <div className={s.mainContainer}>
+        <div className={s.valueContainer}>
         <span className={`${s.value} ${valueClass}`}>
           {props.isMessage ? messageText : props.value}
         </span>
-
+        </div>
+        <div className={s.buttonContainer}>
+          <CustomButton title="inc" disabled={isIncButtonDisabled} onClick={incButtonHandler}/>
+          <CustomButton title="reset" disabled={isResetButtonDisabled} onClick={resetButtonHandler}/>
+        </div>
       </div>
-      <div className={s.buttonContainer}>
-        <CustomButton
-          title="inc"
-          disabled={isIncButtonDisabled}
-          onClick={incButtonHandler}
-        />
-        <CustomButton
-          title="reset"
-          disabled={isResetButtonDisabled}
-          onClick={resetButtonHandler}
-        />
+    )
+  } else if (props.type === 'Counter21') {
+    return (
+      <div className={s.mainContainer}>
+        <div className={s.valueContainer}>
+        <span className={`${s.value} ${valueClass}`}>
+          {props.isMessage ? messageText : props.value}
+        </span>
+        </div>
+        <div className={s.buttonContainer}>
+          <CustomButton title="inc" disabled={isIncButtonDisabled} onClick={incButtonHandler}/>
+          <CustomButton title="reset" disabled={isResetButtonDisabled} onClick={resetButtonHandler}/>
+          <CustomButton title="set" disabled={false} onClick={setButtonHandler}/>
+        </div>
       </div>
-    </div>
-  )
+    )
+  } else {
+    return <div>no type defined</div>
+  }
 }

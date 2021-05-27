@@ -26,7 +26,8 @@ export function Counter2(props: Counter2PropsType) {
                 setValuesByButton={props.setValuesByButton}
                 isError={props.isError}
       />
-      <Main startValue={props.startValue}
+      <Main type={'Counter2'}
+            startValue={props.startValue}
             maxValue={props.maxValue}
             value={props.value}
             setValue={props.setValue}
