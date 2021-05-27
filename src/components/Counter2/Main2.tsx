@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import s from './Universe.module.css'
-import {CustomButton} from './CustomButton';
+import s from '../Universe.module.css'
+import {CustomButton} from '../CustomButton';
 
-type CounterPropsType = {
+type Main2PropsType = {
   startValue: number
   maxValue: number
   value: number
@@ -15,7 +15,7 @@ type CounterPropsType = {
   isResetButtonDisabled: boolean
 }
 
-export function Counter(props: CounterPropsType) {
+export function Main2(props: Main2PropsType) {
 
   // Формирование разных цветов счётчика по условиям
   let [valueClass, setValueClass] = useState('')

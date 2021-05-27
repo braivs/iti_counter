@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react';
-import sU from './Universe.module.css'
-import {CustomButton} from './CustomButton';
+import sU from '../Universe.module.css'
+import {CustomButton} from '../CustomButton';
 import sS from './Settings.module.css'
 
 type SettingsPropsType = {

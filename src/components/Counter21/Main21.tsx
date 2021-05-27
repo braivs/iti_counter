@@ -1,9 +1,10 @@
 import React from 'react';
-import sU from './Universe.module.css'
-import s from './Universe.module.css';
-import {CustomButton} from './CustomButton';
+import sU from '../Universe.module.css'
+import s from '../Universe.module.css';
+import {CustomButton} from '../CustomButton';
+import {NavLink} from 'react-router-dom';
 
-type SettingsWithCounterPropsType = {
+type Main21PropsType = {
   value: number
   incButtonHandler: () => void
   resetButtonHandler: () => void
@@ -11,11 +12,11 @@ type SettingsWithCounterPropsType = {
   isResetButtonDisabled: boolean
 }
 
-export function SettingsWithCounter(props: SettingsWithCounterPropsType) {
+export function Main21(props: Main21PropsType) {
 
   return <div className={sU.mainContainer}>
     <div className={s.valueContainer}>
-        <span>{props.value}</span>
+      <span>{props.value}</span>
 
     </div>
     <div className={s.buttonContainer}>
@@ -29,11 +30,13 @@ export function SettingsWithCounter(props: SettingsWithCounterPropsType) {
         disabled={props.isResetButtonDisabled}
         onClick={props.resetButtonHandler}
       />
-      <CustomButton
-        title="set"
-        disabled={false}
-        onClick={()=>{alert(3)}}
-      />
+      <NavLink to="/counter2.1/settings">
+        <CustomButton
+          title="set"
+          disabled={false}
+          onClick={() => {}}/>
+      </NavLink>
+
     </div>
   </div>
 }

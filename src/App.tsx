@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import './App.scss';
-import {Counter} from './components/Counter';
-import {Settings} from './components/Settings';
-import {SettingsWithCounter} from './components/SettingsWithCounter';
+import {Main2} from './components/Counter2/Main2';
+import {Settings} from './components/Settings/Settings';
 import {Navbar} from './components/Navbar/Navbar';
+import {Redirect, Route} from 'react-router-dom';
+import {Counter2} from './components/Counter2/Counter2';
+import {Counter21} from './components/Counter21/Counter21';
 
 function App() {
   // стартовое и максимальные значения
@@ -88,34 +90,38 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
-      <div className="counterBox">
-        <Settings startValue={startValue}
-                  startValueHandler={startValueHandler}
-                  maxValue={maxValue}
-                  maxValueHandler={maxValueHandler}
-                  value={value}
-                  setValuesByButton={setValuesHandler}
-                  isError={isError}
-        />
-        <Counter startValue={startValue}
-                 maxValue={maxValue}
-                 value={value}
-                 setValue={setValue}
-                 isMessage={isMessage}
-                 isError={isError}
-                 incButtonHandler={incButtonHandler}
-                 resetButtonHandler={resetButtonHandler}
-                 isIncButtonDisabled={isIncButtonDisabled}
-                 isResetButtonDisabled={isResetButtonDisabled}
-        />
-        <SettingsWithCounter value={value}
-                             incButtonHandler={incButtonHandler}
-                             resetButtonHandler={resetButtonHandler}
-                             isIncButtonDisabled={isIncButtonDisabled}
-                             isResetButtonDisabled={isResetButtonDisabled}
-        />
-      </div>
+      <Navbar/>
+      <Route path={'/'} exact render={() => <Redirect to="/counter2"/>}/>
+      <Route path="/counter2" render={() => <Counter2
+        startValue={startValue}
+        maxValue={maxValue}
+        value={value}
+        setValue={setValue}
+        isMessage={isMessage}
+        isError={isError}
+        incButtonHandler={incButtonHandler}
+        resetButtonHandler={resetButtonHandler}
+        isIncButtonDisabled={isIncButtonDisabled}
+        isResetButtonDisabled={isResetButtonDisabled}
+        startValueHandler={startValueHandler}
+        maxValueHandler={maxValueHandler}
+        setValuesByButton={setValuesHandler}
+      />}
+      />
+      <Route path="/counter2.1" render={() => <Counter21
+        startValue={startValue}
+        maxValue={maxValue}
+        value={value}
+        isError={isError}
+        incButtonHandler={incButtonHandler}
+        resetButtonHandler={resetButtonHandler}
+        isIncButtonDisabled={isIncButtonDisabled}
+        isResetButtonDisabled={isResetButtonDisabled}
+        startValueHandler={startValueHandler}
+        maxValueHandler={maxValueHandler}
+        setValuesByButton={setValuesHandler}
+      />}
+      />
     </div>
   );
 }
