@@ -2,6 +2,7 @@ import React from 'react';
 import {Main21} from './Main21';
 import {Redirect, Route} from 'react-router-dom';
 import {Settings} from '../Settings/Settings';
+import {useHistory} from 'react-router-dom';
 
 type Counter21PropsType = {
   startValue: number
@@ -19,9 +20,10 @@ type Counter21PropsType = {
 
 export function Counter21(props: Counter21PropsType) {
 
+  const history = useHistory()
   const setValuesByButtonHandler = () => {
-    alert( 1);
-
+    props.setValuesByButton()
+    history.push('/counter2.1')
   }
 
   return (

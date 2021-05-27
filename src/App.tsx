@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './App.scss';
-import {Main2} from './components/Counter2/Main2';
-import {Settings} from './components/Settings/Settings';
 import {Navbar} from './components/Navbar/Navbar';
 import {Redirect, Route} from 'react-router-dom';
 import {Counter2} from './components/Counter2/Counter2';

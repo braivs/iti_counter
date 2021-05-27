@@ -22,7 +22,7 @@ export function Settings(props: SettingsPropsType) {
     props.startValueHandler(e.currentTarget.valueAsNumber)
   }
 
-  //логика для формирования красной подсветки input
+  //формирование красной подсветки input в случае ошибок
   let errorClsSV = (props.startValue < 0) ? sS.error : '';
   let errorClsBoth = (props.startValue >= props.maxValue) ? sS.error : '';
 
