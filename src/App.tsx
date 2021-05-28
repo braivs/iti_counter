@@ -9,6 +9,10 @@ function App() {
   // стартовое и максимальные значения
   let [startValue, setStartValue] = useState(0)
   let [maxValue, setMaxValue] = useState(5)
+  let [value, setValue] = useState<number>(startValue) // выводимое значение счётчика
+  let [isMessage, setIsMessage] = useState(false) // показывать или нет сообщения вместо value
+  let [isError, setIsError] = useState(false) // есть ли ошибка
+
 
   // при загрузке приложения стартовое, максимальное и текущее значения получаются из localstorage
   useEffect(() => {
@@ -23,9 +27,6 @@ function App() {
     }
   }, [])
 
-  let [value, setValue] = useState<number>(startValue) // выводимое значение счётчика
-  let [isMessage, setIsMessage] = useState(false) // показывать или нет сообщения вместо value
-  let [isError, setIsError] = useState(false) // есть ли ошибка
 
   // обработчик для кнопки set в settings
   const setValuesHandler = () => {

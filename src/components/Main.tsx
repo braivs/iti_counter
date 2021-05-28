@@ -30,10 +30,10 @@ export function Main(props: MainPropsType) {
 
   //увеличить счётчик на один вверх
   const incButtonHandler = () => {
-    let NewValue
-    NewValue = props.value;
-    NewValue++;
-    props.setValue(NewValue)
+    // let NewValue
+    // NewValue = props.value;
+    // NewValue++;
+    props.setValue(props.value +1)
   }
 
   //сбросить счётчик
