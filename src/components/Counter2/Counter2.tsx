@@ -1,6 +1,6 @@
 import React from 'react';
-import {Main} from '../Main';
-import {Settings} from '../Settings/Settings';
+import {CounterDisplay} from '../CounterDisplay/CounterDisplay';
+import {CounterSettings} from '../CounterSettings/CounterSettings';
 import s from './Counter2.module.scss'
 
 type Counter2PropsType = {
@@ -18,21 +18,21 @@ type Counter2PropsType = {
 export function Counter2(props: Counter2PropsType) {
   return (
     <div className={s.container}>
-      <Settings startValue={props.startValue}
-                startValueHandler={props.startValueHandler}
-                maxValue={props.maxValue}
-                maxValueHandler={props.maxValueHandler}
-                value={props.value}
-                setValuesByButton={props.setValuesByButton}
-                isError={props.isError}
+      <CounterSettings startValue={props.startValue}
+                       startValueHandler={props.startValueHandler}
+                       maxValue={props.maxValue}
+                       maxValueHandler={props.maxValueHandler}
+                       value={props.value}
+                       setValuesByButton={props.setValuesByButton}
+                       isError={props.isError}
       />
-      <Main type={'Counter2'}
-            startValue={props.startValue}
-            maxValue={props.maxValue}
-            value={props.value}
-            setValue={props.setValue}
-            isMessage={props.isMessage}
-            isError={props.isError}
+      <CounterDisplay type={'Counter2'}
+                      startValue={props.startValue}
+                      maxValue={props.maxValue}
+                      value={props.value}
+                      setValue={props.setValue}
+                      isMessage={props.isMessage}
+                      isError={props.isError}
       />
     </div>
   )

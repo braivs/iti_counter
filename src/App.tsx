@@ -5,14 +5,12 @@ import {Redirect, Route} from 'react-router-dom';
 import {Counter2} from './components/Counter2/Counter2';
 import {Counter21} from './components/Counter21';
 
-function App() {
-  // стартовое и максимальные значения
-  let [startValue, setStartValue] = useState(0)
-  let [maxValue, setMaxValue] = useState(5)
+export function App() {
+  let [startValue, setStartValue] = useState(0) // стартовое значение
+  let [maxValue, setMaxValue] = useState(5) // максимальное
   let [value, setValue] = useState<number>(startValue) // выводимое значение счётчика
   let [isMessage, setIsMessage] = useState(false) // показывать или нет сообщения вместо value
   let [isError, setIsError] = useState(false) // есть ли ошибка
-
 
   // при загрузке приложения стартовое, максимальное и текущее значения получаются из localstorage
   useEffect(() => {
@@ -27,6 +25,11 @@ function App() {
     }
   }, [])
 
+  // формирование ошибки
+  useEffect(() => {
+    let error = (maxValue <= startValue || startValue < 0)
+    setIsError(error)
+  }, [startValue, maxValue])
 
   // обработчик для кнопки set в settings
   const setValuesHandler = () => {
@@ -35,12 +38,6 @@ function App() {
     setIsMessage(false)
     setValue(startValue)
   }
-
-  // формирование ошибки
-  useEffect(() => {
-    let error = (maxValue <= startValue || startValue < 0)
-    setIsError(error)
-  }, [startValue, maxValue])
 
   // изменение стартового значения в settings
   const startValueHandler = (value: number) => {
@@ -85,5 +82,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

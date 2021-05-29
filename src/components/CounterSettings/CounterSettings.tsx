@@ -1,9 +1,9 @@
 import React, {ChangeEvent} from 'react';
-import sU from '../Universe.module.css'
-import {CustomButton} from '../CustomButton';
-import sS from './Settings.module.css'
+import {CustomButton} from '../CustomButton/CustomButton';
+import './../../App.scss'
+import s from './CounterSettings.module.css'
 
-type SettingsPropsType = {
+type CounterSettingsPropsType = {
   startValue: number
   startValueHandler: (startValue: number) => void
   maxValue: number
@@ -13,7 +13,7 @@ type SettingsPropsType = {
   isError: boolean
 }
 
-export function Settings(props: SettingsPropsType) {
+export function CounterSettings(props: CounterSettingsPropsType) {
   // handlers for settings
   const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement> ) => {
     props.maxValueHandler(e.currentTarget.valueAsNumber)
@@ -23,13 +23,13 @@ export function Settings(props: SettingsPropsType) {
   }
 
   //формирование красной подсветки input в случае ошибок
-  let errorClsSV = (props.startValue < 0) ? sS.error : '';
-  let errorClsBoth = (props.startValue >= props.maxValue) ? sS.error : '';
+  let errorClsSV = (props.startValue < 0) ? s.error : '';
+  let errorClsBoth = (props.startValue >= props.maxValue) ? s.error : '';
 
   return (
-    <div className={sU.mainContainer}>
-      <div className={sU.valueContainer}>
-        <div className={sS.sText}>
+    <div className='mainContainer'>
+      <div className='valueContainer'>
+        <div className={s.sText}>
           <span>max value:</span>
           <input className={errorClsBoth}
                  type="number"
@@ -37,7 +37,7 @@ export function Settings(props: SettingsPropsType) {
                  onChange={onChangeMaxHandler}
           />
         </div>
-        <div className={sS.sText}>
+        <div className={s.sText}>
           <span>start value:</span>
           <input className={`${errorClsSV} ${errorClsBoth}`}
                  type="number"
@@ -47,7 +47,7 @@ export function Settings(props: SettingsPropsType) {
         </div>
 
       </div>
-      <div className={sU.buttonContainer}>
+      <div className='buttonContainer'>
         <CustomButton title='Set'
                       disabled={props.isError}
                       onClick={props.setValuesByButton} />
