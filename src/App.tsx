@@ -4,11 +4,24 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Redirect, Route} from 'react-router-dom';
 import {Counter2} from './components/Counter2/Counter2';
 import {Counter21} from './components/Counter21';
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./bll/store";
+import {incValueAC} from "./bll/counter-reducer";
 
 export function App() {
+  // == NEW ==
+  const value = useSelector<AppStateType, number>(state => state.counter.value)
+  const dispatch = useDispatch()
+
+  const incHandler = () =>  {
+    dispatch(incValueAC())
+  }
+  // == / NEW ==
+
+
   let [startValue, setStartValue] = useState(0) // стартовое значение
   let [maxValue, setMaxValue] = useState(5) // максимальное
-  let [value, setValue] = useState<number>(startValue) // выводимое значение счётчика
+  // let [value, setValue] = useState<number>(startValue) // выводимое значение счётчика
   let [isMessage, setIsMessage] = useState(false) // показывать или нет сообщения вместо value
   let [isError, setIsError] = useState(false) // есть ли ошибка
 
@@ -18,7 +31,7 @@ export function App() {
     let localStorageMaxValueStr = localStorage.getItem('maxValue')
     if (localStorageStartValueStr) {
       setStartValue(JSON.parse(localStorageStartValueStr))
-      setValue(JSON.parse(localStorageStartValueStr))
+      // setValue(JSON.parse(localStorageStartValueStr))
     }
     if (localStorageMaxValueStr) {
       setMaxValue(JSON.parse(localStorageMaxValueStr))
@@ -36,7 +49,7 @@ export function App() {
     localStorage.setItem('startValue', JSON.stringify(startValue))
     localStorage.setItem('maxValue', JSON.stringify(maxValue))
     setIsMessage(false)
-    setValue(startValue)
+    // setValue(startValue)
   }
 
   // изменение стартового значения в settings
@@ -59,7 +72,7 @@ export function App() {
         startValue={startValue}
         maxValue={maxValue}
         value={value}
-        setValue={setValue}
+        setValue={incHandler}
         isMessage={isMessage}
         isError={isError}
         startValueHandler={startValueHandler}
@@ -71,7 +84,7 @@ export function App() {
         startValue={startValue}
         maxValue={maxValue}
         value={value}
-        setValue={setValue}
+        setValue={incHandler}
         isMessage={isMessage}
         isError={isError}
         startValueHandler={startValueHandler}
