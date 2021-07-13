@@ -16,6 +16,11 @@ export const counterReducer = (state: InitialStateType = initialState, action: A
         ...state, value: action.value
       }
     }
+    case "RESET-VALUE": {
+      return {
+        ...state, value: 0
+      }
+    }
 
 
     default:
@@ -24,9 +29,11 @@ export const counterReducer = (state: InitialStateType = initialState, action: A
 }
 
 export const incValueAC = () => ({type: 'INC-VALUE'} as const)
+export const resetValueAC = () => ({type: 'RESET-VALUE'} as const)
 export const setValueFromLocalStorageAC = (value: number) => ({type: 'INC-VALUE-FROM-LOCAL-STORAGE', value} as const)
 
 export type IncValuesActionType = ReturnType<typeof incValueAC>
 export type SetValueFromLocalStorageActionType = ReturnType<typeof setValueFromLocalStorageAC>
+export type ResetValueAT = ReturnType<typeof resetValueAC>
 
-type ActionType = IncValuesActionType | SetValueFromLocalStorageActionType
+type ActionType = IncValuesActionType | SetValueFromLocalStorageActionType | ResetValueAT

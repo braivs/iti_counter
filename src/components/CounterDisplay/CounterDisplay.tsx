@@ -3,18 +3,24 @@ import s from './CounterDisplay.module.scss'
 import '../../App.scss'
 import {CustomButton} from '../CustomButton/CustomButton';
 import {useHistory} from 'react-router-dom';
+import {useDispatch} from "react-redux";
+import {incValueAC, resetValueAC} from "../../bll/counter-reducer";
 
 type CounterDisplayPropsType = {
   type: 'Counter2' | 'Counter21'
   startValue: number
   maxValue: number
   value: number
-  setValue: (value: number) => void
   isMessage: boolean
   isError: boolean
 }
 
 export function CounterDisplay(props: CounterDisplayPropsType) {
+
+  // NEW
+  const dispatch = useDispatch()
+  // / NEW
+
 
   let [valueClass, setValueClass] = useState('') // для разных цветов значения
   let [isIncButtonDisabled, setIsIncButtonDisabled] = useState(false) //блокировка inc кнопки
@@ -53,12 +59,12 @@ export function CounterDisplay(props: CounterDisplayPropsType) {
 
   //увеличить счётчик на один вверх
   const incButtonHandler = () => {
-    props.setValue(props.value + 1)
+    dispatch(incValueAC())
   }
 
   //сбросить счётчик
   const resetButtonHandler = () => {
-    props.setValue(props.startValue);
+    dispatch(resetValueAC())
   }
 
   // set для Counter 2.1

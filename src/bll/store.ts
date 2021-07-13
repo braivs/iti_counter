@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {combineReducers, createStore} from "redux";
 import {counterReducer} from "./counter-reducer";
 import {loadState, saveState} from "../utils/localstorage-utils";
 

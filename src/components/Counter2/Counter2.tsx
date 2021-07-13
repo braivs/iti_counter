@@ -7,7 +7,6 @@ type Counter2PropsType = {
   startValue: number
   maxValue: number
   value: number
-  setValue: (value: number) => void
   isMessage: boolean
   isError: boolean
   startValueHandler: (startValue: number) => void
@@ -30,7 +29,6 @@ export function Counter2(props: Counter2PropsType) {
                       startValue={props.startValue}
                       maxValue={props.maxValue}
                       value={props.value}
-                      setValue={props.setValue}
                       isMessage={props.isMessage}
                       isError={props.isError}
       />

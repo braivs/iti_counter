@@ -7,7 +7,6 @@ type Counter21PropsType = {
   startValue: number
   maxValue: number
   value: number
-  setValue: (value: number) => void
   isMessage: boolean
   isError: boolean
   startValueHandler: (startValue: number) => void
@@ -31,7 +30,6 @@ export function Counter21(props: Counter21PropsType) {
                         startValue={props.startValue}
                         maxValue={props.maxValue}
                         value={props.value}
-                        setValue={props.setValue}
                         isMessage={props.isMessage}
                         isError={props.isError}
         />}/>

@@ -13,9 +13,10 @@ export function App() {
   const value = useSelector<AppStateType, number>(state => state.counter.value)
   const dispatch = useDispatch()
 
-  const incHandler = () =>  {
+  /*const incHandler = () =>  {
+    debugger
     dispatch(incValueAC())
-  }
+  }*/
   // == / NEW ==
 
 
@@ -72,7 +73,6 @@ export function App() {
         startValue={startValue}
         maxValue={maxValue}
         value={value}
-        setValue={incHandler}
         isMessage={isMessage}
         isError={isError}
         startValueHandler={startValueHandler}
@@ -84,7 +84,6 @@ export function App() {
         startValue={startValue}
         maxValue={maxValue}
         value={value}
-        setValue={incHandler}
         isMessage={isMessage}
         isError={isError}
         startValueHandler={startValueHandler}
